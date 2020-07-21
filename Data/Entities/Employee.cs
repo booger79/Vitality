@@ -13,5 +13,8 @@ namespace Data.Entities
         public Guid FieldId { get; set; }
         public Guid CollegeId { get; set; }
 
+       
+        public College College { get; set; }
+        public Field Field { get; set; }
     }
 }

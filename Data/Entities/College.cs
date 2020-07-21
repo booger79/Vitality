@@ -8,7 +8,14 @@ namespace Data.Entities
 {
     public class College:BaseEntity
     {
+        public College()
+        {
+            Employees = new List<Employee>();
+        }
+
+        public string Name { get; set; }
         public string City { get; set; }
-        public int MyProperty { get; set; }
+
+        public List<Employee> Employees { get; set; }
     }
 }

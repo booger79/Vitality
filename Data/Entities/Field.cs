@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Data.Entities
 {
-    class Field:BaseEntity
+    public class Field:BaseEntity
     {
+        public Field()
+        {
+            Employees = new List<Employee>();
+        }
+
+        public List<Employee> Employees { get; set; }
 
     }
 }
