@@ -51,6 +51,8 @@ namespace Data.Repositories
 
         public bool Insert(T entity)
         {
+            entity.Id = Guid.NewGuid();
+            entity.CreatedTime = DateTime.Now;
             this.entities.Add(entity);
             Commit();
             return true;
@@ -59,6 +61,11 @@ namespace Data.Repositories
 
         public bool Insert(IEnumerable<T> entities)
         {
+            foreach (var item in entities)
+            {
+                item.Id = Guid.NewGuid();
+                item.CreatedTime = DateTime.Now;
+            }
             this.entities.AddRange(entities);
             Commit();
             return true;
