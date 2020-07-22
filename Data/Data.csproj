@@ -56,8 +56,10 @@
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\VitalityDatabase.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity 
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private DbSet<T> entities;
         private VitalityDatabase _vitalityDatabase;
@@ -51,22 +51,31 @@ namespace Data.Repositories
 
         public bool Insert(T entity)
         {
-            throw new NotImplementedException();
+            this.entities.Add(entity);
+            Commit();
+            return true;
+
         }
 
         public bool Insert(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            this.entities.AddRange(entities);
+            Commit();
+            return true;
         }
 
         public bool Update(T entity)
         {
-            throw new NotImplementedException();
+            _vitalityDatabase.Entry(entity).State = EntityState.Modified;  
+            Commit();
+            return true;
         }
 
         public bool Update(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            _vitalityDatabase.Entry(entities).State = EntityState.Modified;
+            Commit();
+            return true;
         }
     }
 }
