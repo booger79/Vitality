@@ -4,7 +4,7 @@ using Data.Entities;
 using Data.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test
+namespace Test.Repositories
 {
     [TestClass]
     public class FieldTest
@@ -24,7 +24,7 @@ namespace Test
         {
             FieldRepository fieldRepository = new FieldRepository(new Data.Entities.VitalityDatabase());
             var fieldList =fieldRepository.GetAll();
-            
+           
             if (fieldList.Count>0)
             {
                 Field field1 = fieldList.First();

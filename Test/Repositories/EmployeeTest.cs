@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Test.Repositories
 {
+    [TestClass]
     public class EmployeeTest
     {
         [TestMethod]
@@ -48,6 +49,66 @@ namespace Test.Repositories
                 Assert.IsTrue(employeeRepository.Delete(employee));
             }
 
+
+        }
+        [TestMethod]
+        public void DeleteListCollegeTest()
+        {
+            EmployeeRepository employeeRepository = new EmployeeRepository(new Data.Entities.VitalityDatabase());
+            var employeeList = employeeRepository.GetAll();
+
+            if (employeeList.Count > 0)
+            {
+                Assert.IsTrue(employeeRepository.Delete(employeeList));
+            }
+
+
+        }
+
+        [TestMethod]
+        public void InsertListEmployeeTest()         
+        {
+
+            List<Employee> employees = new List<Employee>();
+            Employee employee = new Employee();
+            Field field = new Field();
+            field.Name = "Computer Science";
+            College college = new College();
+            college.Name = "İstanbul Üniversitesi";
+
+
+            FieldRepository fieldRepository = new FieldRepository(new VitalityDatabase());
+            fieldRepository.Insert(field);
+
+            CollegeRepository collegeRepository = new CollegeRepository(new VitalityDatabase());
+            collegeRepository.Insert(college);
+
+
+            employee.FirstName = "Deniz";
+            employee.LastName = "Doğan";
+            employee.FieldId = field.Id;
+            employee.CollegeId = college.Id;
+            employees.Add(employee);
+            Employee employee2 = new Employee();
+            employee2.CollegeId = college.Id;
+            employee2.FieldId = field.Id;
+            employee2.FirstName = "Deniz2";
+            employee2.LastName = "Doğan2";
+            employees.Add(employee2);
+
+            VitalityDatabase vitalityDatabase = new VitalityDatabase();
+
+            EmployeeRepository employeeRepository = new EmployeeRepository(vitalityDatabase);
+            Assert.IsTrue(employeeRepository.Insert(employees));
+
+
+        }
+
+
+        [TestMethod]
+        public void UpdateListEmployeeTest()
+        {
+           
 
         }
     }
