@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    class EmployeeRepository : Repository<Employee>,IEmployeeRepository
+    public class EmployeeRepository : Repository<Employee>,IEmployeeRepository
 
     {
         public EmployeeRepository(VitalityDatabase vitalityDatabase) : base(vitalityDatabase)

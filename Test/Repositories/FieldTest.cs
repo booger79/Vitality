@@ -34,5 +34,20 @@ namespace Test
 
            
         }
+
+        [TestMethod]
+        public void DeleteFieldTest()
+        {
+            FieldRepository fieldRepository = new FieldRepository(new Data.Entities.VitalityDatabase());
+            var fieldList = fieldRepository.GetAll();
+
+            if (fieldList.Count > 0)
+            {
+                Field field1 = fieldList.First();
+                Assert.IsTrue(fieldRepository.Delete(field1));
+            }
+
+
+        }
     }
 }
