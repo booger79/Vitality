@@ -50,5 +50,60 @@ namespace Test.Repositories
 
         }
 
+
+        [TestMethod]
+        public void InsertListCollegeTest()
+        {
+            List<College> colleges = new List<College>();
+            College college = new College();
+            college.City = "İstanbul";
+            college.Name = "İstanbul Üniversitesi";
+            colleges.Add(college);
+
+            College college2 = new College();
+            college2.City = "İzmir";
+            college2.Name = "Ege Üniversitesi";
+            colleges.Add(college2);
+
+            VitalityDatabase vitalityDatabase = new VitalityDatabase();
+            CollegeRepository collegeRepository = new CollegeRepository(new VitalityDatabase());
+
+
+            Assert.IsTrue(collegeRepository.Insert(colleges));
+
+
+        }
+
+        [TestMethod]
+        public void UpdateListCollegeTest()
+        {
+            List<College> colleges = new List<College>();
+            College college = new College();
+            College college2 = new College();
+
+            college.Name = "İstanbul Üniversitesi";
+            college.City = "İstanbul";
+
+            college2.Name = "Ege Üniversitesi";
+            college2.City = "İstanbul";
+
+            colleges.Add(college);
+            colleges.Add(college2);
+
+            CollegeRepository collegeRepository = new CollegeRepository(new VitalityDatabase());
+
+            collegeRepository.Insert(colleges);
+
+
+
+            foreach (var item in colleges)
+            {
+                item.City = "İzmir";
+            }
+
+            Assert.IsTrue(collegeRepository.Update(colleges));
+
+        }
+
     }
 }

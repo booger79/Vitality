@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -80,9 +81,18 @@ namespace Data.Repositories
 
         public bool Update(IEnumerable<T> entities)
         {
-            _vitalityDatabase.Entry(entities).State = EntityState.Modified;
+
+            foreach (var item in entities)
+            {
+            _vitalityDatabase.Entry(item).State = EntityState.Modified;
+            }
             Commit();
             return true;
+        }
+
+        public IQueryable<T> GetListByFilter(Expression<System.Func<T, bool>>  expression)
+        {
+            return this.entities.Where(expression);
         }
     }
 }

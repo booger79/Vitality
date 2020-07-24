@@ -15,7 +15,7 @@ namespace Data.Entities
 
         public string Name { get; set; }
 
-        public List<Employee> Employees { get; set; }
+        public virtual List<Employee> Employees { get; set; }
 
     }
 }

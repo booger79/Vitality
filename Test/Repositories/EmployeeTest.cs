@@ -15,10 +15,31 @@ namespace Test.Repositories
     {
         [TestMethod]
         public void AddEmployeeTest()
+
         {
+           
+            CollegeRepository collegeRepository = new CollegeRepository(new VitalityDatabase());
+            FieldRepository fieldRepository = new FieldRepository(new VitalityDatabase());
             EmployeeRepository employeeRepository = new EmployeeRepository(new Data.Entities.VitalityDatabase());
+           
+
             Employee employee = new Employee();
+            Field field = new Field();
+            College college = new College();
+            field.Name = "Yazılım";
+            college.Name = "İstanbul Üniversitesi";
+
             employee.FirstName = "Aybars";
+            employee.LastName = "Agcabuga";
+
+            fieldRepository.Insert(field);
+            collegeRepository.Insert(college);
+
+            employee.FieldId = field.Id;
+            employee.CollegeId = college.Id;
+
+            
+
             Assert.IsTrue(employeeRepository.Insert(employee));
         }
 
@@ -111,5 +132,40 @@ namespace Test.Repositories
            
 
         }
+
+        [TestMethod]
+        public void FilterFieldTest()
+        {
+
+
+            EmployeeRepository employeeRepository = new EmployeeRepository(new VitalityDatabase());
+            CollegeRepository collegeRepository = new CollegeRepository(new VitalityDatabase());
+            Employee employee = new Employee();
+            College college = new College();
+            FieldRepository fieldRepository = new FieldRepository(new VitalityDatabase());
+            Field field = new Field();
+
+            field.Name = "Yazılım";
+
+            fieldRepository.Insert(field);
+
+
+            college.Name = "9 Eylül";
+            employee.FirstName = "Aybars";
+            employee.LastName = "Agacabuga";
+
+            collegeRepository.Insert(college);
+            employee.CollegeId = college.Id;
+            employee.FieldId = field.Id;
+            
+        
+            employeeRepository.Insert(employee);
+
+            var fieldList = employeeRepository.GetListByFilter(x => x.College.Name == "9 Eylül").ToList();
+
+            var name = fieldList[0].College.Name;
+            Assert.IsTrue(name == "9 Eylül");
+        }
+
     }
 }

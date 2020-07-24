@@ -14,7 +14,7 @@ namespace Data.Entities
         public Guid CollegeId { get; set; }
 
        
-        public College College { get; set; }
-        public Field Field { get; set; }
+        public virtual College College { get; set; }
+        public virtual Field Field { get; set; }
     }
 }
