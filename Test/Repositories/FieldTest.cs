@@ -11,7 +11,7 @@ namespace Test.Repositories
     public class FieldTest
     {
         [TestMethod]
-        public void AddFieldTest()
+        public void InsertFieldTest()
         {
             FieldRepository fieldRepository = new FieldRepository(new Data.Entities.VitalityDatabase());
             Field field = new Field();
@@ -96,6 +96,22 @@ namespace Test.Repositories
             fieldRepository.Insert(field);
             var fieldList = fieldRepository.GetListByFilter( x => x.Name == "Deniz").ToList();
             Assert.IsTrue(fieldList.Count > 0);
+        }
+
+        [TestMethod]
+        public void DeleteListFieldTest()
+        {
+
+            FieldRepository fieldRepository = new FieldRepository(new VitalityDatabase());
+            List<Field> fields = new List<Field>();
+
+            fields = fieldRepository.GetAll();
+
+
+            if (fields.Count > 0)
+            {
+                Assert.IsTrue(fieldRepository.Delete(fields));
+            }
         }
     }
 }

@@ -105,5 +105,32 @@ namespace Test.Repositories
 
         }
 
+       /* [TestMethod]
+        public void UpdateListCollegeTest()
+        {
+            CollegeRepository collegeRepository = new CollegeRepository(new VitalityDatabase());
+            College college = new College();
+            College college2 = new College();
+        }*/
+
+        [TestMethod]
+        public void DeleteListCollegeTest()
+        {
+            CollegeRepository collegeRepository = new CollegeRepository(new VitalityDatabase());
+            /*College college = new College();
+            College college2 = new College();
+            colleges.Add(college);
+            colleges.Add(college2);*/
+
+            List<College> colleges = new List<College>();
+            colleges = collegeRepository.GetAll();
+            
+
+            if (colleges.Count > 0)
+            {
+                Assert.IsTrue(collegeRepository.Delete(colleges));
+            }
+        }
+
     }
 }
